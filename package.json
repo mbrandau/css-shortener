@@ -1,0 +1,33 @@
+{
+  "name": "css-shortener",
+  "version": "1.0.0",
+  "description": "Utility to shorten css class names",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "css-shortener": "./bin/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbrandau/css-shortener.git"
+  },
+  "keywords": [
+    "css",
+    "short",
+    "class",
+    "name",
+    "shorten"
+  ],
+  "author": "Maximilian Brandau",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mbrandau/css-shortener/issues"
+  },
+  "homepage": "https://github.com/mbrandau/css-shortener#readme",
+  "dependencies": {
+    "replacestream": "^4.0.3",
+    "yargs": "^11.0.0"
+  }
+}
