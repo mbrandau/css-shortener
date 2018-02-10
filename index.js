@@ -8,9 +8,16 @@ var CssShortener = function() {
 CssShortener.prototype.getMap = function() {
   return this._classNameMap;
 }
+CssShortener.prototype.importMap = function(map, override) {
+  for (var orig in map) {
+    if (this._classNameMap[orig] != null) {
+      if (override === true) this._classNameMap[orig] = map[orig];
+    } else this._classNameMap[orig] = map[orig];
+  }
+}
 CssShortener.prototype.stream = function(callback) {
   const t = this;
-  return replaceStream(/\.[a-z][a-z0-9-_]*/g, function(match){
+  return replaceStream(/\.[a-z][a-z0-9-_]*/g, function(match) {
     var id = '';
     var orig = match.substr(1);
     if (t._classNameMap[orig] != null) {
@@ -19,7 +26,7 @@ CssShortener.prototype.stream = function(callback) {
       id = t._idGenerator();
       t._classNameMap[orig] = id;
     }
-    return '.'+id;
+    return '.' + id;
   });
 }
 
