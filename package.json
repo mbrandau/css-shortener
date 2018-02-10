@@ -4,7 +4,7 @@
   "description": "Utility to shorten css class names",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc mocha"
   },
   "bin": {
     "css-shortener": "./bin/cli.js"
@@ -29,5 +29,10 @@
   "dependencies": {
     "replacestream": "^4.0.3",
     "yargs": "^11.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.0.0",
+    "nyc": "^11.4.1",
+    "should": "^13.2.1"
   }
 }
