@@ -1,8 +1,9 @@
 const replaceStream = require('replacestream');
 const IdGenerator = require('./idGenerator');
 
-var CssShortener = function() {
-  this._idGenerator = new IdGenerator();
+var CssShortener = function(options) {
+  if (!options) options = {};
+  this._idGenerator = new IdGenerator(options.alphabet);
   this._classNameMap = {};
 };
 CssShortener.prototype.getMap = function() {
