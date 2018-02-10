@@ -15,11 +15,17 @@ require('yargs')
       describe: 'output file for shortened css',
       type: 'string'
     }).option('map', {
+      alias: 'm',
       describe: 'output file for the class name map (JSON)',
+      type: 'string'
+    }).option('import-map', {
+      alias: 'im',
+      describe: '.json file to import an existing map from',
       type: 'string'
     });
   }, argv => {
     const csss = new CssShortener();
+    if(argv['import-map'])csss.importMap(JSON.parse(fs.readFileSync(argv['import-map'])));
     var inputStream = argv.input ? fs.createReadStream(argv.input) : process.stdin;
     var outputStream = argv.output ? fs.createWriteStream(argv.output) : process.stdout;
     inputStream
@@ -31,7 +37,6 @@ require('yargs')
       .pipe(csss.stream())
       .pipe(outputStream);
   })
-  .example('$0 shorten -i input.css -o output.css -mo map.json', 'Shorten class names from input.css and output the file to output.css; the map is saved in map.json')
   .demandCommand()
   .help()
   .argv
