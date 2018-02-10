@@ -4,7 +4,8 @@
   "description": "Utility to shorten css class names",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha"
+    "test": "nyc mocha",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "bin": {
     "css-shortener": "./bin/cli.js"
