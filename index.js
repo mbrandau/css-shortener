@@ -1,6 +1,8 @@
 const replaceStream = require('replacestream');
 const IdGenerator = require('./idGenerator');
 
+const CLASS_NAME_REGEX = /\.[a-z][a-z0-9-_]*/g;
+
 var CssShortener = function(options) {
   if (!options) options = {};
   this._idGenerator = new IdGenerator(options.alphabet);
@@ -18,7 +20,7 @@ CssShortener.prototype.importMap = function(map, override) {
 }
 CssShortener.prototype.stream = function(callback) {
   const t = this;
-  return replaceStream(/\.[a-z][a-z0-9-_]*/g, function(match) {
+  return replaceStream(CLASS_NAME_REGEX, function(match) {
     var id;
     var orig = match.substr(1); // Remove dot infront of class name
 
