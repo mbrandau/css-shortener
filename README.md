@@ -2,34 +2,127 @@
 
 Utility to shorten css class names
 
-## Usage
+## Table of contents
+1. [Quick Start](#quick-start)
+2. [Documentation](#documentation)
+3. [Examples](#examples)
+
+## Quick Start
 
 ### CLI
 
 Install the tool using `npm install -g css-shortener`
 
 ```sh
-$ cat input.css | css-shortener shorten --map map.json > output.css
-$ css-shortener shorten -i input.css -o output.css --map map.json
-# Both produce the same result
+# Both ways produce the same result
+
+cat input.css | css-shortener shorten --map map.json > output.css
+
+css-shortener shorten -i input.css -o output.css --map map.json
 ```
 
 ### API
 
 Install the package with `npm install --save css-shortener`
 
-```javascript
+```js
 const fs = require('fs');
 const CssShortener = require('css-shortener');
 
-const shortener = new CssShortener();
+const cssShortener = new CssShortener();
 
 fs.createReadStream('input.css')
-  .pipe(shortener.stream())
+  .pipe(cssShortener.stream())
   .pipe(fs.createWriteStream('output.css'))
   .on('finish', () => {
-    fs.writeFile('map.json', JSON.stringify(shortener.getMap()), () => {
+    fs.writeFile('map.json', JSON.stringify(cssShortener.getMap()), () => {
       console.log('Done!');
     });
   });
+```
+
+## Documentation
+
+### Constructor
+
+```js
+const options = {
+  alphabet: 'abcdef' // Alphabet that is used for class name generation
+};
+const cssShortener = new CssShortener(options);
+```
+The `options` parameter can be omitted.
+
+### #importMap(map, override)
+
+Imports mappings into the shortener
+
+```js
+cssShortener.importMap({
+  "my-extremely-long-class-name": "a"
+}, false);
+```
+If `override` is true, class names that are already mapped will be overridden.  
+The `override` parameter can be omitted.
+
+### #getMap()
+
+Returns the mapped class names
+
+```js
+var map = cssShortener.getMap();
+/*
+ * {
+ *   "my-extremely-long-class-name": "a"
+ * }
+ */
+```
+
+### #stream()
+```js
+const fs = require('fs');
+
+fs.createReadStream('input.css')
+  .pipe(cssShortener.stream())
+  .pipe(fs.createWriteStream('output.css'))
+  .on('finish', () => {
+    fs.writeFile('map.json', JSON.stringify(cssShortener.getMap()), () => {
+      console.log('Done!');
+    });
+  });
+```
+
+## Examples
+
+### CSS filter for nunjucks and express
+
+```js
+const express = require('express');
+const nunjucks = require('nunjucks');
+
+const app = express();
+
+const env = nunjucks.configure('your-views-folder', {express: app});
+
+env.addFilter('css', function(str) {
+  const classes = str.split(' ');
+  let res = '';
+  for (let c of classes) res += getShortenedCssClass(c) + ' ';
+  return res.trim();
+});
+
+var map = JSON.parse(fs.readFileSync('./map.json'));
+
+function getClassName(original) {
+  let res = original;
+  if (map[original] != null) res = map[original];
+  return res;
+}
+```
+
+```html
+<div class="{{'my-extremely-long-class-name'|css}}"></div>
+```
+```html
+<div class="a"></div>
 ```
