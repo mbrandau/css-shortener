@@ -1,6 +1,8 @@
 const should = require('should');
 const CssShortener = require('../index');
 const IdGenerator = require('../idGenerator');
+const str = require('string-to-stream');
+const toString = require('stream-to-string');
 
 describe('CssShortener', function() {
   describe('#importMap()', function() {
@@ -49,6 +51,19 @@ describe('CssShortener', function() {
   });
   describe('#stream()', function() {
     // TODO
+  });
+  describe('#htmlStream()', function() {
+    it('should replace mapped css classes', function() {
+      var c = new CssShortener();
+      var map = {
+        'test-class': 'a'
+      };
+      c.importMap(map);
+      const stream = str('<div class="abc test-class 15a"></div>').pipe(c.htmlStream());
+      toString(stream).then(function(msg) {
+        msg.should.equal('<div class="abc a 15a"></div>');
+      });
+    });
   });
 });
 
