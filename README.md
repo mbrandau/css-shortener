@@ -92,6 +92,25 @@ fs.createReadStream('input.css')
   });
 ```
 
+### #htmlStream()
+Replace mapped class names in HTML code.
+```js
+const fs = require('fs');
+
+// import a map with cssShortener.importMap({'long-class':'a'});
+fs.createReadStream('index.html')
+  .pipe(cssShortener.htmlStream())
+  .pipe(fs.createWriteStream('index.output.html'));
+```
+```html
+<!-- index.html -->
+<div class="long-class otherclass"></div>
+
+<!-- index.output.html -->
+<div class="a otherclass"></div>
+```
+`otherclass` wasn't touched since it is not a mapped class name.
+
 ## Examples
 
 ### CSS filter for nunjucks and express
