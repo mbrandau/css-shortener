@@ -71,11 +71,11 @@ Returns the mapped class names
 
 ```js
 var map = cssShortener.getMap();
-/*
- * {
- *   "my-extremely-long-class-name": "a"
- * }
- */
+```
+```json
+{
+  "my-extremely-long-class-name": "a"
+}
 ```
 
 ### #stream()
@@ -97,7 +97,7 @@ Replace mapped class names in HTML code.
 ```js
 const fs = require('fs');
 
-// import a map with cssShortener.importMap({'long-class':'a'});
+cssShortener.importMap({'long-class':'a'}); // Import mappings
 fs.createReadStream('index.html')
   .pipe(cssShortener.htmlStream())
   .pipe(fs.createWriteStream('index.output.html'));
