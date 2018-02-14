@@ -50,10 +50,34 @@ describe('CssShortener', function() {
     });
   });
   describe('#stream()', function() {
-    // TODO
+    it('should replace css classes with new IDs', function(done) {
+      var c = new CssShortener();
+      const stream = str('p.myclass{}.testclass{}').pipe(c.stream());
+      toString(stream).then(function(msg) {
+        msg.should.equal('p.a{}.b{}');
+        c.getMap().should.deepEqual({
+          'myclass': 'a',
+          'testclass': 'b'
+        });
+        done();
+      });
+    });
+    it('should replace css classes with already mapped IDs', function(done) {
+      var c = new CssShortener();
+      c.importMap({'myclass':'zx'});
+      const stream = str('p.myclass{}.testclass{}').pipe(c.stream());
+      toString(stream).then(function(msg) {
+        msg.should.equal('p.zx{}.a{}');
+        c.getMap().should.deepEqual({
+          'myclass': 'zx',
+          'testclass': 'a'
+        });
+        done();
+      });
+    });
   });
   describe('#htmlStream()', function() {
-    it('should replace mapped css classes', function() {
+    it('should replace mapped css classes', function(done) {
       var c = new CssShortener();
       var map = {
         'test-class': 'a'
@@ -62,6 +86,7 @@ describe('CssShortener', function() {
       const stream = str('<div class="abc test-class 15a"></div>').pipe(c.htmlStream());
       toString(stream).then(function(msg) {
         msg.should.equal('<div class="abc a 15a"></div>');
+        done();
       });
     });
   });
