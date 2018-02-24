@@ -5,6 +5,19 @@ const str = require('string-to-stream');
 const toString = require('stream-to-string');
 
 describe('CssShortener', function() {
+  it('should use custom alphabet', function(done) {
+    var c = new CssShortener({alphabet:['a']});
+    const stream = str('.class1{}.class2{}.class3{}').pipe(c.stream());
+    toString(stream).then(function(msg) {
+      msg.should.equal('.a{}.aa{}.aaa{}');
+      c.getMap().should.deepEqual({
+        'class1': 'a',
+        'class2': 'aa',
+        'class3': 'aaa'
+      });
+      done();
+    });
+  });
   describe('#importMap()', function() {
     it('should import mappings from a map object', function() {
       var c = new CssShortener();
@@ -64,13 +77,44 @@ describe('CssShortener', function() {
     });
     it('should replace css classes with already mapped IDs', function(done) {
       var c = new CssShortener();
-      c.importMap({'myclass':'zx'});
+      c.importMap({
+        'myclass': 'zx'
+      });
       const stream = str('p.myclass{}.testclass{}').pipe(c.stream());
       toString(stream).then(function(msg) {
         msg.should.equal('p.zx{}.a{}');
         c.getMap().should.deepEqual({
           'myclass': 'zx',
           'testclass': 'a'
+        });
+        done();
+      });
+    });
+    it('should ignore css classes in comments', function(done) {
+      var c = new CssShortener();
+      const stream = str(`/* p.myclass{}.testclass{} */
+/* file.css
+.class
+.test/*`).pipe(c.stream());
+      toString(stream).then(function(msg) {
+        msg.should.equal(`/* p.myclass{}.testclass{} */
+/* file.css
+.class
+.test/*`);
+        c.getMap().should.deepEqual({});
+        done();
+      });
+    });
+    it('should replace css classes in long selectors', function(done) {
+      var c = new CssShortener();
+      const stream = str('p.class0,.class1,html,td.class2,tr{}.testclass{}').pipe(c.stream());
+      toString(stream).then(function(msg) {
+        msg.should.equal('p.a,.b,html,td.c,tr{}.e{}');
+        c.getMap().should.deepEqual({
+          'class0': 'a',
+          'class1': 'b',
+          'class2': 'c',
+          'testclass': 'e'
         });
         done();
       });
@@ -94,8 +138,8 @@ describe('CssShortener', function() {
 
 describe('IdGenerator (default alphabet)', function() {
   var gen = new IdGenerator();
-  it('should not with a number or a hyphen', function() {
-    for (var i = 0; i < 1000; i++) {
+  it('should not start with a number or a hyphen', function() {
+    for (var i = 0; i < 100; i++) {
       gen().should.not.match(/^[0-9-].*$/);
     }
   });
