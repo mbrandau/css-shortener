@@ -1,7 +1,7 @@
 const replaceStream = require('replacestream');
 const IdGenerator = require('./idGenerator');
 
-const CLASS_NAME_REGEX = /\.[a-z][a-z0-9-_]*/g;
+const CLASS_NAME_REGEX = /\/\*[\s\S]*?\*\/|(\.[a-z_-][\w-]*)(?=[^{}]*{)/g; // https://stackoverflow.com/a/48962872/5133130
 const HTML_CLASS_REGEX = /class="(.*)"/g;
 
 var CssShortener = function(options) {
@@ -21,9 +21,10 @@ CssShortener.prototype.importMap = function(map, override) {
 }
 CssShortener.prototype.stream = function(callback) {
   const t = this;
-  return replaceStream(CLASS_NAME_REGEX, function(match) {
+  return replaceStream(CLASS_NAME_REGEX, function(match, capturingGroup) {
+    if(!capturingGroup)return match;
     var id;
-    var orig = match.substr(1); // Remove dot infront of class name
+    var orig = capturingGroup.substr(1); // Remove dot infront of class name
 
     if (t._classNameMap[orig] != null) id = t._classNameMap[orig]; // Use mapped class name
     else id = t._classNameMap[orig] = t._idGenerator(); // Generate and map new class name
