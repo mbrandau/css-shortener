@@ -51,6 +51,7 @@ const options = {
 };
 const cssShortener = new CssShortener(options);
 ```
+The default alphabet is `abcefghijklmnopqrstuvwxyz0123456789_-`. Note that there is no `d` to avoid generation of the combination `ad`.
 The `options` parameter can be omitted.
 
 ### #importMap(map, override)
@@ -140,8 +141,8 @@ function getClassName(original) {
 ```
 
 ```html
+<!-- BEFORE -->
 <div class="{{'my-extremely-long-class-name'|css}}"></div>
-```
-```html
+<!-- RENDERED -->
 <div class="a"></div>
 ```
