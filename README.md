@@ -8,14 +8,14 @@ Utility to shorten css class names. **Saves more than 20%** of [Bootstrap](https
 p.this-class-is-extremely-long-and-definitely-needs-to-be-shortened, p.why-is-this-so-long-if-it-just-makes-white-text {
   color: white;
 }
-.ignore-me-please {
+.ignore-stay-like-this { // 'ignore-' prefix gets trimmed off and the class will not be changed
   color: pink;
 }
 /* AFTER */
 p.a, p.b {
   color: white;
 }
-.ignore-me-please {
+.stay-like-this {
   color: pink;
 }
 ```
