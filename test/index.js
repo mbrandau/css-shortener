@@ -119,6 +119,20 @@ describe('CssShortener', function() {
         done();
       });
     });
+    it('should ignore css classes with specified prefix', function(done) {
+      var c = new CssShortener({ignorePrefix:'ignoreme-'});
+      const stream = str('p.class0,.ignoreme-testclass{},.class1,html,td.class2,tr{}.testclass{}').pipe(c.cssStream());
+      toString(stream).then(function(msg) {
+        msg.should.equal('p.a,.testclass{},.b,html,td.c,tr{}.e{}');
+        c.getMap().should.deepEqual({
+          'class0': 'a',
+          'class1': 'b',
+          'class2': 'c',
+          'testclass': 'e'
+        });
+        done();
+      });
+    });
   });
   describe('#htmlStream()', function() {
     it('should replace mapped css classes', function(done) {
