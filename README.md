@@ -24,14 +24,15 @@ p.b {
 1. [Quick Start](#quick-start)
     1. [API](#api)
     2. [CLI](#cli)
-2. [Documentation](#documentation)
+2. [API Documentation](#api-documentation)
     1. [Constructor](#constructor)
         - [Options](#options)
     2. [`#importMap(map, override)`](#importmapmap-override)
     3. [`#getMap()`](#getmap)
     4. [`#cssStream()`](#cssstream)
     5. [`#htmlStream()`](#htmlstream)
-3. [Examples](#examples)
+3. [CLI Documentation](#cli-documentation)
+4. [Examples](#examples)
     1. [CSS filter for nunjucks and express](#css-filter-for-nunjucks-and-express)
 
 ## Quick Start
@@ -68,7 +69,7 @@ cat input.css | css-shortener shorten --map map.json > output.css
 css-shortener shorten -i input.css -o output.css --map map.json
 ```
 
-## Documentation
+## API Documentation
 
 ### Constructor
 
@@ -150,6 +151,16 @@ fs.createReadStream('index.html')
 <div class="a otherclass"></div>
 ```
 `otherclass` wasn't touched since it is not a mapped class name.
+
+## CLI Documentation
+
+### Command `shorten`
+
+Documentation coming soon. Meanwhile, see `css-shortener --help`.
+
+### Command `html`
+
+Documentation coming soon. Meanwhile, see `css-shortener --help`.
 
 ## Examples
 
