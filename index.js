@@ -43,11 +43,14 @@ CssShortener.prototype.htmlStream = function(callback) {
   const t = this;
   return replaceStream(HTML_CLASS_REGEX, function(match) {
     const classes = match.trim().split(' ');
-    var res = '';
-    for (var c of classes) {
-      res += (t._classNameMap[c] != null ? t._classNameMap[c] : c) + ' ';
+    const classCount = classes.length;
+    var result = '';
+    for (var i = 0; i < classCount; i++) {
+      // Check if class is mapped and add it to the result
+      result += (t._classNameMap[classes[i]] != null ? t._classNameMap[classes[i]] : classes[i]);
+      if (i < classCount - 1) result += ' ';
     }
-    return res.trim();
+    return result;
   });
 }
 
