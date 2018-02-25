@@ -26,6 +26,10 @@ p.b {
     2. [CLI](#cli)
 2. [Documentation](#documentation)
     1. [Constructor](#constructor)
+    2. [`#importMap(map, override)`](#importmapmap-override)
+    3. [`#getMap()`](#getmap)
+    4. [`#cssStream()`](#cssstream)
+    5. [`#htmlStream()`](#htmlstream)
 3. [Examples](#examples)
     1. [CSS filter for nunjucks and express](#css-filter-for-nunjucks-and-express)
 
