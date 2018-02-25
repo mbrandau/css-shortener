@@ -89,6 +89,7 @@ The `options` parameter can be omitted.
 | alphabet | *string* | optional | The alphabet is used to generate the new class names. | `'abcefghijklmnopqrstuvwxyz0123456789_-'` |
 | ignorePrefix | *string* | optional | Classes starting with this prefix will be omited from replacing. Set to `undefined` to disable. | `'ignore-'` |
 | trimIgnorePrefix | *boolean* | optional | If true, the prefix will be trimmed off of the matched classes. | `true` |
+
 Note that there is no `d` in the default alphabet to avoid generation of the combination `ad`.
 
 ### `#importMap(map, override)`
