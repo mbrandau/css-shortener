@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0 (upcoming)
+
+  - ADD `ignorePrefix` option to omit classes from being replaced
+
 ## 1.1.1
 
   - MODIFY RegExp to not match classes in comments [Thanks to *revo*](https://stackoverflow.com/a/48962872/5133130)
