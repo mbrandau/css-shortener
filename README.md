@@ -26,6 +26,7 @@ p.b {
     2. [CLI](#cli)
 2. [Documentation](#documentation)
     1. [Constructor](#constructor)
+        - [Options](#options)
     2. [`#importMap(map, override)`](#importmapmap-override)
     3. [`#getMap()`](#getmap)
     4. [`#cssStream()`](#cssstream)
@@ -73,14 +74,22 @@ css-shortener shorten -i input.css -o output.css --map map.json
 
 ```js
 const options = {
-  alphabet: 'abcdef', // Alphabet that is used for class name generation
-  ignorePrefix: 'ignore-me-', // If specified, classes starting with this prefix will be omited from replacing (Default: 'ignore-')
-  trimIgnorePrefix: false // If true, the prefix will be trimmed off of the classes (Default: true)
+  alphabet: 'abcdef',
+  ignorePrefix: 'ignore-me-',
+  trimIgnorePrefix: false
 };
 const cs = new CssShortener(options);
 ```
-The default alphabet is `abcefghijklmnopqrstuvwxyz0123456789_-`. Note that there is no `d` to avoid generation of the combination `ad`.
 The `options` parameter can be omitted.
+
+#### Options
+
+| Option | Type | Optional | Description | Default value |
+| ------ | ---- | -------- | ----------- | ------------- |
+| alphabet | *string* | optional | The alphabet is used to generate the new class names. | `'abcefghijklmnopqrstuvwxyz0123456789_-'` |
+| ignorePrefix | *string* | optional | Classes starting with this prefix will be omited from replacing. Set to `undefined` to disable. | `'ignore-'` |
+| trimIgnorePrefix | *boolean* | optional | If true, the prefix will be trimmed off of the matched classes. | `true` |
+Note that there is no `d` in the default alphabet to avoid generation of the combination `ad`.
 
 ### `#importMap(map, override)`
 
