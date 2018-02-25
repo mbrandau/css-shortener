@@ -22,12 +22,12 @@ p.b {
 
 ## Table of contents
 1. [Quick Start](#quick-start)
-  1. [API](#api)
-  2. [CLI](#cli)
+    1. [API](#api)
+    2. [CLI](#cli)
 2. [Documentation](#documentation)
-  1. [Constructor](#constructor)
+    1. [Constructor](#constructor)
 3. [Examples](#examples)
-  1. [CSS filter for nunjucks and express](#css-filter-for-nunjucks-and-express)
+    1. [CSS filter for nunjucks and express](#css-filter-for-nunjucks-and-express)
 
 ## Quick Start
 
