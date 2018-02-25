@@ -84,8 +84,8 @@ The `options` parameter can be omitted.
 
 #### Options
 
-| Option | Type | Optional | Description | Default value |
-| ------ | ---- | -------- | ----------- | ------------- |
+| Option | Type | Optionality | Description | Default value |
+| ------ | ---- | ----------- | ----------- | ------------- |
 | alphabet | *string* | optional | The alphabet is used to generate the new class names. | `'abcefghijklmnopqrstuvwxyz0123456789_-'` |
 | ignorePrefix | *string* | optional | Classes starting with this prefix will be omited from replacing. Set to `undefined` to disable. | `'ignore-'` |
 | trimIgnorePrefix | *boolean* | optional | If true, the prefix will be trimmed off of the matched classes. | `true` |
