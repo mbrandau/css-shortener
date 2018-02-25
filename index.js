@@ -7,6 +7,8 @@ const HTML_CLASS_REGEX = /class="(.*)"/g;
 var CssShortener = function(options) {
   if (!options) options = {};
   this._options = options;
+  if (!this._options.hasOwnProperty('ignorePrefix')) this._options.ignorePrefix = 'ignore-';
+  if (!this._options.hasOwnProperty('trimIgnorePrefix')) this._options.trimIgnorePrefix = true;
   this._idGenerator = new IdGenerator(this._options.alphabet);
   this._classNameMap = {};
 };
@@ -28,7 +30,8 @@ CssShortener.prototype.cssStream = CssShortener.prototype.stream = function(call
     var orig = capturingGroup.substr(1); // Remove dot infront of class name
 
     // If the ignorePrefix option is set and the current class starts with the prefix, trim the prefix off and ignore the class.
-    if (t._options.ignorePrefix && orig.startsWith(t._options.ignorePrefix)) return `.${orig.substr(t._options.ignorePrefix.length)}`;
+    if (t._options.ignorePrefix && orig.startsWith(t._options.ignorePrefix))
+      return t._options.trimIgnorePrefix ? `.${orig.substr(t._options.ignorePrefix.length)}` : `.${orig}`;
 
     if (t._classNameMap[orig] != null) id = t._classNameMap[orig]; // Use mapped class name
     else id = t._classNameMap[orig] = t._idGenerator(); // Generate and map new class name

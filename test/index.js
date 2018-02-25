@@ -6,7 +6,9 @@ const toString = require('stream-to-string');
 
 describe('CssShortener', function() {
   it('should use custom alphabet', function(done) {
-    var c = new CssShortener({alphabet:['a']});
+    var c = new CssShortener({
+      alphabet: ['a']
+    });
     const stream = str('.class1{}.class2{}.class3{}').pipe(c.cssStream());
     toString(stream).then(function(msg) {
       msg.should.equal('.a{}.aa{}.aaa{}');
@@ -14,6 +16,18 @@ describe('CssShortener', function() {
         'class1': 'a',
         'class2': 'aa',
         'class3': 'aaa'
+      });
+      done();
+    });
+  });
+  it('should use default ignorePrefix and default trimIgnorePrefix options', function(done) {
+    var c = new CssShortener();
+    const stream = str('.class1{}.ignore-class2{}.class3{}').pipe(c.cssStream());
+    toString(stream).then(function(msg) {
+      msg.should.equal('.a{}.class2{}.b{}');
+      c.getMap().should.deepEqual({
+        'class1': 'a',
+        'class3': 'b'
       });
       done();
     });
@@ -120,10 +134,28 @@ describe('CssShortener', function() {
       });
     });
     it('should ignore css classes with specified prefix', function(done) {
-      var c = new CssShortener({ignorePrefix:'ignoreme-'});
+      var c = new CssShortener({
+        ignorePrefix: 'ignoreme-'
+      });
       const stream = str('p.class0,.ignoreme-testclass{},.class1,html,td.class2,tr{}.testclass{}').pipe(c.cssStream());
       toString(stream).then(function(msg) {
         msg.should.equal('p.a,.testclass{},.b,html,td.c,tr{}.e{}');
+        c.getMap().should.deepEqual({
+          'class0': 'a',
+          'class1': 'b',
+          'class2': 'c',
+          'testclass': 'e'
+        });
+        done();
+      });
+    });
+    it('should not trim ignorePrefix if trimIgnorePrefix is false', function(done) {
+      var c = new CssShortener({
+        trimIgnorePrefix: false
+      });
+      const stream = str('p.class0,.ignore-testclass{},.class1,html,td.class2,tr{}.testclass{}').pipe(c.cssStream());
+      toString(stream).then(function(msg) {
+        msg.should.equal('p.a,.ignore-testclass{},.b,html,td.c,tr{}.e{}');
         c.getMap().should.deepEqual({
           'class0': 'a',
           'class1': 'b',
