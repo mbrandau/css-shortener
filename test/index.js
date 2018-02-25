@@ -173,10 +173,19 @@ describe('CssShortener', function() {
         'test-class': 'a'
       };
       c.importMap(map);
+
       const stream = str('<div class="abc test-class 15a"></div>').pipe(c.htmlStream());
       toString(stream).then(function(msg) {
         msg.should.equal('<div class="abc a 15a"></div>');
-        done();
+        const stream = str('<div class="test-class"></div>').pipe(c.htmlStream());
+        toString(stream).then(function(msg) {
+          msg.should.equal('<div class="a"></div>');
+          const stream = str('<div class="myclass"></div>').pipe(c.htmlStream());
+          toString(stream).then(function(msg) {
+            msg.should.equal('<div class="myclass"></div>');
+            done();
+          });
+        });
       });
     });
   });

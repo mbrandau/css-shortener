@@ -41,8 +41,9 @@ CssShortener.prototype.cssStream = CssShortener.prototype.stream = function(call
 }
 CssShortener.prototype.htmlStream = function(callback) {
   const t = this;
-  return replaceStream(HTML_CLASS_REGEX, function(match) {
-    const classes = match.trim().split(' ');
+  return replaceStream(HTML_CLASS_REGEX, function(match, capturingGroup) {
+    if (!capturingGroup) return match;
+    const classes = capturingGroup.trim().split(' ');
     const classCount = classes.length;
     var result = '';
     for (var i = 0; i < classCount; i++) {
@@ -50,7 +51,7 @@ CssShortener.prototype.htmlStream = function(callback) {
       result += (t._classNameMap[classes[i]] != null ? t._classNameMap[classes[i]] : classes[i]);
       if (i < classCount - 1) result += ' ';
     }
-    return result;
+    return `class="${result}"`;
   });
 }
 
