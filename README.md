@@ -32,7 +32,7 @@ const CssShortener = require('css-shortener');
 const cssShortener = new CssShortener();
 
 fs.createReadStream('input.css')
-  .pipe(cssShortener.stream())
+  .pipe(cssShortener.cssStream())
   .pipe(fs.createWriteStream('output.css'))
   .on('finish', () => {
     fs.writeFile('map.json', JSON.stringify(cssShortener.getMap()), () => {
@@ -79,12 +79,12 @@ var map = cssShortener.getMap();
 }
 ```
 
-### #stream()
+### #cssStream() ~~#stream()~~
 ```js
 const fs = require('fs');
 
 fs.createReadStream('input.css')
-  .pipe(cssShortener.stream())
+  .pipe(cssShortener.cssStream())
   .pipe(fs.createWriteStream('output.css'))
   .on('finish', () => {
     fs.writeFile('map.json', JSON.stringify(cssShortener.getMap()), () => {

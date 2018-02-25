@@ -7,7 +7,7 @@ const toString = require('stream-to-string');
 describe('CssShortener', function() {
   it('should use custom alphabet', function(done) {
     var c = new CssShortener({alphabet:['a']});
-    const stream = str('.class1{}.class2{}.class3{}').pipe(c.stream());
+    const stream = str('.class1{}.class2{}.class3{}').pipe(c.cssStream());
     toString(stream).then(function(msg) {
       msg.should.equal('.a{}.aa{}.aaa{}');
       c.getMap().should.deepEqual({
@@ -62,10 +62,10 @@ describe('CssShortener', function() {
       c.getMap().should.deepEqual(map);
     });
   });
-  describe('#stream()', function() {
+  describe('#cssStream() / #stream()', function() {
     it('should replace css classes with new IDs', function(done) {
       var c = new CssShortener();
-      const stream = str('p.myclass{}.testclass{}').pipe(c.stream());
+      const stream = str('p.myclass{}.testclass{}').pipe(c.cssStream());
       toString(stream).then(function(msg) {
         msg.should.equal('p.a{}.b{}');
         c.getMap().should.deepEqual({
@@ -80,7 +80,7 @@ describe('CssShortener', function() {
       c.importMap({
         'myclass': 'zx'
       });
-      const stream = str('p.myclass{}.testclass{}').pipe(c.stream());
+      const stream = str('p.myclass{}.testclass{}').pipe(c.cssStream());
       toString(stream).then(function(msg) {
         msg.should.equal('p.zx{}.a{}');
         c.getMap().should.deepEqual({
@@ -95,7 +95,7 @@ describe('CssShortener', function() {
       const stream = str(`/* p.myclass{}.testclass{} */
 /* file.css
 .class
-.test/*`).pipe(c.stream());
+.test/*`).pipe(c.cssStream());
       toString(stream).then(function(msg) {
         msg.should.equal(`/* p.myclass{}.testclass{} */
 /* file.css
@@ -107,7 +107,7 @@ describe('CssShortener', function() {
     });
     it('should replace css classes in long selectors', function(done) {
       var c = new CssShortener();
-      const stream = str('p.class0,.class1,html,td.class2,tr{}.testclass{}').pipe(c.stream());
+      const stream = str('p.class0,.class1,html,td.class2,tr{}.testclass{}').pipe(c.cssStream());
       toString(stream).then(function(msg) {
         msg.should.equal('p.a,.b,html,td.c,tr{}.e{}');
         c.getMap().should.deepEqual({

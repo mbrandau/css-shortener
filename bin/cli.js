@@ -34,7 +34,7 @@ require('yargs')
           fs.writeFileSync(argv.map, JSON.stringify(csss.getMap()));
         }
       })
-      .pipe(csss.stream())
+      .pipe(csss.cssStream())
       .pipe(outputStream);
   })
   .demandCommand()
