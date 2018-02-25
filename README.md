@@ -22,8 +22,12 @@ p.b {
 
 ## Table of contents
 1. [Quick Start](#quick-start)
+  1. [API](#api)
+  2. [CLI](#cli)
 2. [Documentation](#documentation)
+  1. [Constructor](#constructor)
 3. [Examples](#examples)
+  1. [CSS filter for nunjucks and express](#css-filter-for-nunjucks-and-express)
 
 ## Quick Start
 
@@ -74,7 +78,7 @@ const cs = new CssShortener(options);
 The default alphabet is `abcefghijklmnopqrstuvwxyz0123456789_-`. Note that there is no `d` to avoid generation of the combination `ad`.
 The `options` parameter can be omitted.
 
-### #importMap(map, override)
+### `#importMap(map, override)`
 
 Imports mappings into the shortener
 
@@ -86,7 +90,7 @@ cssShortener.importMap({
 If `override` is true, class names that are already mapped will be overridden.  
 The `override` parameter can be omitted.
 
-### #getMap()
+### `#getMap()`
 
 Returns the mapped class names
 
@@ -99,7 +103,8 @@ var map = cssShortener.getMap();
 }
 ```
 
-### #cssStream() ~~#stream()~~
+### `#cssStream()`
+Previously was called `#stream()`. `#stream()` is now deprecated.
 ```js
 const fs = require('fs');
 
@@ -113,7 +118,7 @@ fs.createReadStream('input.css')
   });
 ```
 
-### #htmlStream()
+### `#htmlStream()`
 Replace mapped class names in HTML code.
 ```js
 const fs = require('fs');
