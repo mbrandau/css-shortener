@@ -2,7 +2,7 @@
 
 ## 1.2.0 (upcoming)
 
-  - ADD `ignorePrefix` option to omit classes from being replaced
+  - ADD `ignorePrefix` and `trimIgnorePrefix` options to omit classes from being replaced
 
 ## 1.1.1
 
