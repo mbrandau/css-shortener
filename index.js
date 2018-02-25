@@ -2,7 +2,7 @@ const replaceStream = require('replacestream');
 const IdGenerator = require('./idGenerator');
 
 const CLASS_NAME_REGEX = /\/\*[\s\S]*?\*\/|(\.[a-z_-][\w-]*)(?=[^{}]*{)/g; // https://stackoverflow.com/a/48962872/5133130
-const HTML_CLASS_REGEX = /class="(.*)"/g;
+const HTML_CLASS_REGEX = /class="([\w-\s]*)"/g;
 
 var CssShortener = function(options) {
   if (!options) options = {};
