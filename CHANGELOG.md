@@ -3,6 +3,8 @@
 ## 1.2.0 (upcoming)
 
   - ADD `ignorePrefix` and `trimIgnorePrefix` options to omit classes from being replaced
+  - OPTIMIZE performance for #htmlStream()
+  - FIX HTML RegExp (was too greedy)
 
 ## 1.1.1
 
