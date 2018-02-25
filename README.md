@@ -1,6 +1,24 @@
 # css-shortener [![Build Status](https://img.shields.io/travis/mbrandau/css-shortener.svg)](https://travis-ci.org/mbrandau/css-shortener) [![Coverage Status](https://img.shields.io/coveralls/github/mbrandau/css-shortener.svg)](https://coveralls.io/github/mbrandau/css-shortener?branch=master) [![npm](https://img.shields.io/npm/dt/css-shortener.svg)](https://www.npmjs.com/package/css-shortener)
 
-Utility to shorten css class names. **Saves more than 20%** of [Bootstrap](https://getbootstrap.com)!
+Utility to shorten css class names. **Saves more than 20%** of [Bootstrap](https://getbootstrap.com)! It also **works with minified code**.
+
+### Preview
+```css
+/* BEFORE */
+p.this-class-is-extremely-long-and-definitely-needs-to-be-shortened, p.why-is-this-so-long-if-it-just-makes-white-text {
+  color: white;
+}
+.ignore-me-please {
+  color: pink;
+}
+/* AFTER */
+p.a, p.b {
+  color: white;
+}
+.ignore-me-please {
+  color: pink;
+}
+```
 
 ## Table of contents
 1. [Quick Start](#quick-start)
@@ -8,6 +26,26 @@ Utility to shorten css class names. **Saves more than 20%** of [Bootstrap](https
 3. [Examples](#examples)
 
 ## Quick Start
+
+### API
+
+Install the package with `npm install --save css-shortener`
+
+```js
+const fs = require('fs');
+const CssShortener = require('css-shortener');
+
+const cs = new CssShortener();
+
+fs.createReadStream('input.css')
+  .pipe(cs.cssStream())
+  .pipe(fs.createWriteStream('output.css'))
+  .on('finish', () => {
+    fs.writeFile('map.json', JSON.stringify(cs.getMap()), () => {
+      console.log('Done!');
+    });
+  });
+```
 
 ### CLI
 
@@ -21,35 +59,17 @@ cat input.css | css-shortener shorten --map map.json > output.css
 css-shortener shorten -i input.css -o output.css --map map.json
 ```
 
-### API
-
-Install the package with `npm install --save css-shortener`
-
-```js
-const fs = require('fs');
-const CssShortener = require('css-shortener');
-
-const cssShortener = new CssShortener();
-
-fs.createReadStream('input.css')
-  .pipe(cssShortener.cssStream())
-  .pipe(fs.createWriteStream('output.css'))
-  .on('finish', () => {
-    fs.writeFile('map.json', JSON.stringify(cssShortener.getMap()), () => {
-      console.log('Done!');
-    });
-  });
-```
-
 ## Documentation
 
 ### Constructor
 
 ```js
 const options = {
-  alphabet: 'abcdef' // Alphabet that is used for class name generation
+  alphabet: 'abcdef', // Alphabet that is used for class name generation
+  ignorePrefix: 'ignore-me-', // If specified, classes starting with this prefix will be omited from replacing (Default: 'ignore-')
+  trimIgnorePrefix: false // If true, the prefix will be trimmed off of the classes (Default: true)
 };
-const cssShortener = new CssShortener(options);
+const cs = new CssShortener(options);
 ```
 The default alphabet is `abcefghijklmnopqrstuvwxyz0123456789_-`. Note that there is no `d` to avoid generation of the combination `ad`.
 The `options` parameter can be omitted.
