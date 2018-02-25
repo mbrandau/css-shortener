@@ -5,19 +5,19 @@ Utility to shorten css class names. **Saves more than 20%** of [Bootstrap](https
 ### Preview
 ```css
 /* BEFORE */
-p.this-class-is-extremely-long-and-definitely-needs-to-be-shortened, p.why-is-this-so-long-if-it-just-makes-white-text {
+p.this-class-is-extremely-long-and-definitely-needs-to-be-shortened,
+p.why-is-this-so-long-if-it-just-makes-white-text {
   color: white;
 }
-.ignore-stay-like-this { // 'ignore-' prefix gets trimmed off and the class will not be changed
-  color: pink;
-}
+
+/* 'ignore-' prefix gets trimmed off and the class will not be changed */
+.ignore-stay-like-this { color: pink; }
 /* AFTER */
-p.a, p.b {
+p.a,
+p.b {
   color: white;
 }
-.stay-like-this {
-  color: pink;
-}
+.stay-like-this { color: pink; }
 ```
 
 ## Table of contents
