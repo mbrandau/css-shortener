@@ -50,7 +50,7 @@ describe('CssShortener', function () {
                     'test-class': 'b'
                 };
             c.importMap(prevMap);
-            c.importMap(importMap)
+            c.importMap(importMap);
             c.getMap().should.deepEqual(prevMap);
         });
         it('should override existing mappings', function () {
