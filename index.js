@@ -22,7 +22,7 @@ CssShortener.prototype.importMap = function (map, override) {
         } else this._classNameMap[orig] = map[orig]; // Import class name
     }
 };
-CssShortener.prototype.cssStream = CssShortener.prototype.stream = function () {
+CssShortener.prototype.cssStream = function () {
     const t = this;
     return replaceStream(CLASS_NAME_REGEX, function (match, capturingGroup) {
         if (!capturingGroup) return match;
