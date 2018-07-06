@@ -166,6 +166,72 @@ describe('CssShortener', function () {
             });
         });
     });
+    describe('#replaceCss()', function () {
+        it('should replace css classes with new IDs', function () {
+            const c = new CssShortener();
+            c.replaceCss('p.myclass{}.testclass{}').should.equal('p.a{}.b{}');
+            c.getMap().should.deepEqual({
+                'myclass': 'a',
+                'testclass': 'b'
+            });
+        });
+        it('should replace css classes with already mapped IDs', function () {
+            const c = new CssShortener();
+            c.importMap({
+                'myclass': 'zx'
+            });
+            c.replaceCss('p.myclass{}.testclass{}').should.equal('p.zx{}.a{}');
+            c.getMap().should.deepEqual({
+                'myclass': 'zx',
+                'testclass': 'a'
+            });
+        });
+        it('should ignore css classes in comments', function () {
+            const c = new CssShortener();
+            c.replaceCss(`/* p.myclass{}.testclass{} */
+/* file.css
+.class
+.test/*`).should.equal(`/* p.myclass{}.testclass{} */
+/* file.css
+.class
+.test/*`);
+            c.getMap().should.deepEqual({});
+        });
+        it('should replace css classes in long selectors', function () {
+            const c = new CssShortener();
+            c.replaceCss('p.class0,.class1,html,td.class2,tr{}.testclass{}').should.equal('p.a,.b,html,td.c,tr{}.e{}');
+            c.getMap().should.deepEqual({
+                'class0': 'a',
+                'class1': 'b',
+                'class2': 'c',
+                'testclass': 'e'
+            });
+        });
+        it('should ignore css classes with specified prefix', function () {
+            const c = new CssShortener({
+                ignorePrefix: 'ignoreme-'
+            });
+            c.replaceCss('p.class0,.ignoreme-testclass{},.class1,html,td.class2,tr{}.testclass{}').should.equal('p.a,.testclass{},.b,html,td.c,tr{}.e{}');
+            c.getMap().should.deepEqual({
+                'class0': 'a',
+                'class1': 'b',
+                'class2': 'c',
+                'testclass': 'e'
+            });
+        });
+        it('should not trim ignorePrefix if trimIgnorePrefix is false', function () {
+            const c = new CssShortener({
+                trimIgnorePrefix: false
+            });
+            c.replaceCss('p.class0,.ignore-testclass{},.class1,html,td.class2,tr{}.testclass{}').should.equal('p.a,.ignore-testclass{},.b,html,td.c,tr{}.e{}');
+            c.getMap().should.deepEqual({
+                'class0': 'a',
+                'class1': 'b',
+                'class2': 'c',
+                'testclass': 'e'
+            });
+        });
+    });
     describe('#htmlStream()', function () {
         it('should replace mapped css classes', function (done) {
             const c = new CssShortener(),
@@ -206,7 +272,8 @@ describe('CssShortener', function () {
             c.replaceHtml('<div class="myclass"></div>').should.equal('<div class="myclass"></div>');
         });
     });
-});
+})
+;
 
 describe('IdGenerator (default alphabet)', function () {
     const gen = new IdGenerator();
