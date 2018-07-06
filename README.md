@@ -29,8 +29,10 @@ p.b {
         - [Options](#options)
     2. [`#importMap(map, override)`](#importmapmap-override)
     3. [`#getMap()`](#getmap)
-    4. [`#cssStream()`](#cssstream)
-    5. [`#htmlStream()`](#htmlstream)
+    4. [`#replaceCss()`](#replacecss)
+    5. [`#replaceHtml()`](#replacehtml)
+    6. [`#cssStream()`](#cssstream)
+    7. [`#htmlStream()`](#htmlstream)
 3. [CLI Documentation](#cli-documentation)
 4. [Examples](#examples)
     1. [CSS filter for nunjucks and express](#css-filter-for-nunjucks-and-express)
@@ -116,6 +118,20 @@ var map = cssShortener.getMap();
 {
   "my-extremely-long-class-name": "a"
 }
+```
+
+### `#replaceCss()`
+```js
+console.log(cssShortener.replaceCss('.my-extremely-long-class-name{color:black;}'));
+
+// => '.a{color:black;}'
+```
+
+### `#replaceHtml()`
+```js
+console.log(cssShortener.replaceHtml('<div class="font-bold my-extremely-long-class-name">Test</div>'));
+
+// => '<div class="font-bold a">Test</div>'
 ```
 
 ### `#cssStream()`
