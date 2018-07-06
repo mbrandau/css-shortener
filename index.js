@@ -54,5 +54,20 @@ CssShortener.prototype.htmlStream = function () {
         return `class="${result}"`;
     });
 };
+CssShortener.prototype.replaceHtml = function (html) {
+    const t = this;
+    return html.replace(HTML_CLASS_REGEX, (match, capturingGroup)=>{
+        if (!capturingGroup) return match;
+        const classes = capturingGroup.trim().split(' ');
+        const classCount = classes.length;
+        let result = '';
+        for (let i = 0; i < classCount; i++) {
+            // Check if class is mapped and add it to the result
+            result += (t._classNameMap[classes[i]] != null ? t._classNameMap[classes[i]] : classes[i]);
+            if (i < classCount - 1) result += ' ';
+        }
+        return `class="${result}"`;
+    });
+};
 
 module.exports = CssShortener;

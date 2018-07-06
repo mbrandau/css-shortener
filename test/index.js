@@ -166,29 +166,46 @@ describe('CssShortener', function() {
       });
     });
   });
-  describe('#htmlStream()', function() {
-    it('should replace mapped css classes', function(done) {
-      var c = new CssShortener();
-      var map = {
-        'test-class': 'a'
-      };
-      c.importMap(map);
+    describe('#htmlStream()', function() {
+        it('should replace mapped css classes', function(done) {
+            var c = new CssShortener();
+            var map = {
+                'test-class': 'a'
+            };
+            c.importMap(map);
 
-      const stream = str('<div class="abc test-class 15a"></div>').pipe(c.htmlStream());
-      toString(stream).then(function(msg) {
-        msg.should.equal('<div class="abc a 15a"></div>');
-        const stream = str('<div class="test-class"></div>').pipe(c.htmlStream());
-        toString(stream).then(function(msg) {
-          msg.should.equal('<div class="a"></div>');
-          const stream = str('<div class="myclass"></div>').pipe(c.htmlStream());
-          toString(stream).then(function(msg) {
-            msg.should.equal('<div class="myclass"></div>');
-            done();
-          });
+            const stream = str('<div class="abc test-class 15a"></div>').pipe(c.htmlStream());
+            toString(stream).then(function(msg) {
+                msg.should.equal('<div class="abc a 15a"></div>');
+                const stream = str('<div class="test-class"></div>').pipe(c.htmlStream());
+                toString(stream).then(function(msg) {
+                    msg.should.equal('<div class="a"></div>');
+                    const stream = str('<div class="myclass"></div>').pipe(c.htmlStream());
+                    toString(stream).then(function(msg) {
+                        msg.should.equal('<div class="myclass"></div>');
+                        done();
+                    });
+                });
+            });
         });
-      });
     });
-  });
+    describe('#replaceHtml()', function() {
+        it('should replace mapped css classes', function() {
+            var c = new CssShortener();
+            var map = {
+                'test-class': 'a'
+            };
+            c.importMap(map);
+
+            const html = '<div class="abc test-class 15a"></div>';
+            const replaced = c.replaceHtml(html);
+            replaced.should.equal('<div class="abc a 15a"></div>');
+
+            c.replaceHtml('<div class="test-class"></div>').should.equal('<div class="a"></div>');
+
+            c.replaceHtml('<div class="myclass"></div>').should.equal('<div class="myclass"></div>');
+        });
+    });
 });
 
 describe('IdGenerator (default alphabet)', function() {
