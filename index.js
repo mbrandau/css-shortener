@@ -56,7 +56,7 @@ CssShortener.prototype.htmlStream = function () {
 };
 CssShortener.prototype.replaceHtml = function (html) {
     const t = this;
-    return html.replace(HTML_CLASS_REGEX, (match, capturingGroup)=>{
+    return html.replace(HTML_CLASS_REGEX, (match, capturingGroup) => {
         if (!capturingGroup) return match;
         const classes = capturingGroup.trim().split(' ');
         const classCount = classes.length;
