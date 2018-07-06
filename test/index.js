@@ -76,7 +76,7 @@ describe('CssShortener', function () {
             c.getMap().should.deepEqual(map);
         });
     });
-    describe('#cssStream() / #stream()', function () {
+    describe('#cssStream()', function () {
         it('should replace css classes with new IDs', function (done) {
             const c = new CssShortener(),
                 stream = str('p.myclass{}.testclass{}').pipe(c.cssStream());
