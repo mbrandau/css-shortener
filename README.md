@@ -119,7 +119,7 @@ var map = cssShortener.getMap();
 ```
 
 ### `#cssStream()`
-Previously was called `#stream()`. `#stream()` is now deprecated.
+Shortens the CSS class names.
 ```js
 const fs = require('fs');
 
