@@ -12,8 +12,8 @@ var IdGenerator = function(alphabet) {
     var res = generateId(options);
     while (/^[0-9-].*$/.test(res)) res = generateId(options);
     return res;
-  }
-}
+  };
+};
 
 var generateId = function(options) {
   var res = '';
@@ -31,6 +31,6 @@ var generateId = function(options) {
   }
 
   return res;
-}
+};
 
 module.exports = IdGenerator;
