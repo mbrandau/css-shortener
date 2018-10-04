@@ -2,8 +2,9 @@
   "name": "css-shortener",
   "version": "2.0.0",
   "description": "Utility to shorten css class names",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
+    "build": "babel src -d lib",
     "test": "nyc mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -32,6 +33,9 @@
     "yargs": "^11.1.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
     "coveralls": "^3.0.2",
     "mocha": "^5.2.0",
     "nyc": "^11.9.0",
