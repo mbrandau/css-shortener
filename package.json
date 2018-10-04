@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "babel src -d lib",
-    "prettier": "prettier --single-quote --trailing-comma es5 --write src/**/*.js",
+    "prettier": "prettier --single-quote --write src/**/*.js",
     "test": "nyc mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
