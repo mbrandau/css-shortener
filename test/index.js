@@ -1,6 +1,6 @@
 const should = require('should');
-const CssShortener = require('../index');
-const IdGenerator = require('../idGenerator');
+const CssShortener = require('../lib/index');
+const IdGenerator = require('../lib/idGenerator');
 const str = require('string-to-stream');
 const toString = require('stream-to-string');
 
