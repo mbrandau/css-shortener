@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0 - 10/09/2018
+
+  - Move generation of new class names to a public function (`getNewClassName(className)`)
+
 ## 1.2.0 - 02/25/2018
 
   - ADD `ignorePrefix` and `trimIgnorePrefix` options to omit classes from being replaced
