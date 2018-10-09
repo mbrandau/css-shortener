@@ -17,21 +17,9 @@ const CssShortener = function(options) {
   const t = this;
   const replaceCss = function(match, capturingGroup) {
     if (!capturingGroup) return match;
-    let id,
-      orig = capturingGroup.substr(1); // Remove dot infront of class name
+    const className = capturingGroup.substr(1); // Remove dot infront of class name
 
-    // If the ignorePrefix option is set and the current class starts with the prefix, trim the prefix off and ignore the class.
-    if (t._options.ignorePrefix && orig.startsWith(t._options.ignorePrefix))
-      return t._options.trimIgnorePrefix
-        ? `.${orig.substr(t._options.ignorePrefix.length)}`
-        : `.${orig}`;
-
-    // Use already mapped class name
-    if (t._classNameMap[orig] != null) id = t._classNameMap[orig];
-    // Generate and map new class name
-    else id = t._classNameMap[orig] = t._idGenerator();
-
-    return `.${id}`;
+    return `.${t.getNewClassName(className)}`;
   };
   const replaceHtml = function(match, capturingGroup) {
     if (!capturingGroup) return match;
@@ -61,12 +49,26 @@ const CssShortener = function(options) {
     }
   };
 
+  this.getNewClassName = function(className) {
+    // If the ignorePrefix option is set and the current class starts with the prefix, trim the prefix off and ignore the class.
+    if (
+      t._options.ignorePrefix &&
+      className.startsWith(t._options.ignorePrefix)
+    )
+      return t._options.trimIgnorePrefix
+        ? className.substr(t._options.ignorePrefix.length)
+        : className;
+
+    // Return the already mapped class name
+    if (t._classNameMap[className] != null) return t._classNameMap[className];
+    // Generate, map and return the new class name
+    else return (t._classNameMap[className] = t._idGenerator());
+  };
   this.cssStream = function() {
     return replaceStream(CLASS_NAME_REGEX, replaceCss);
   };
-  this.replaceCss = function(css, sourceMap) {
-    const replacedCss = css.replace(CLASS_NAME_REGEX, replaceCss);
-    return replacedCss;
+  this.replaceCss = function(css) {
+    return css.replace(CLASS_NAME_REGEX, replaceCss);
   };
   this.htmlStream = function() {
     return replaceStream(HTML_CLASS_REGEX, replaceHtml);
