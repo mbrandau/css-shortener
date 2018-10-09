@@ -44,7 +44,8 @@ const CssShortener = function(options) {
     for (let classNameToImport in map) {
       if (this._classNameMap[classNameToImport] != null) {
         // Override mapped class name
-        if (override === true) this._classNameMap[classNameToImport] = map[classNameToImport];
+        if (override === true)
+          this._classNameMap[classNameToImport] = map[classNameToImport];
       } else this._classNameMap[classNameToImport] = map[classNameToImport]; // Import class name
     }
   };
