@@ -36,7 +36,7 @@
   "homepage": "https://github.com/mbrandau/css-shortener#readme",
   "dependencies": {
     "replacestream": "^4.0.3",
-    "yargs": "^13.0.0"
+    "yargs": "^14.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.5.5",
