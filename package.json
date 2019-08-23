@@ -49,6 +49,6 @@
     "prettier": "1.18.2",
     "should": "13.2.3",
     "stream-to-string": "1.2.0",
-    "string-to-stream": "2.0.0"
+    "string-to-stream": "3.0.0"
   }
 }
