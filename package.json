@@ -46,7 +46,7 @@
     "mocha": "6.2.2",
     "nyc": "14.1.1",
     "pre-commit": "1.2.2",
-    "prettier": "1.18.2",
+    "prettier": "1.19.1",
     "should": "13.2.3",
     "stream-to-string": "1.2.0",
     "string-to-stream": "3.0.1"
