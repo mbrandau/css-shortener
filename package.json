@@ -44,7 +44,7 @@
     "@babel/preset-env": "7.8.7",
     "coveralls": "3.0.8",
     "mocha": "7.1.0",
-    "nyc": "14.1.1",
+    "nyc": "15.0.0",
     "pre-commit": "1.2.2",
     "prettier": "1.19.1",
     "should": "13.2.3",
