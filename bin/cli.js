@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const CssShortener = require('css-shortener');
+const CssShortener = require('../lib/index');
 const fs = require('fs');
 
 require('yargs')
