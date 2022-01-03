@@ -1,5 +1,5 @@
 // Leaving 'd' out to avoid generating the word 'ad'
-const defaultAlphabet = 'abcefghijklmnopqrstuvwxyz0123456789_-';
+const defaultAlphabet = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-';
 
 var IdGenerator = function(alphabet) {
   var options = {

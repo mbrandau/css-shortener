@@ -2,7 +2,7 @@ const replaceStream = require('replacestream');
 const IdGenerator = require('./idGenerator');
 
 const CLASS_NAME_REGEX = /\/\*[\s\S]*?\*\/|(\.[a-z_-][\w-]*)(?=[^{}]*{)/g; // https://stackoverflow.com/a/48962872/5133130
-const HTML_CLASS_REGEX = /class="([\w-\s]*)"/g;
+const HTML_CLASS_REGEX = /class=["|']{1}([\w-\s]*)["|']{1}/g;
 
 /**
  * Provides methods to replaces CSS class names
