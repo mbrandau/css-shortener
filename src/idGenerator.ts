@@ -1,26 +1,26 @@
-"use strict";
-
 // Leaving 'd' out to avoid generating the word 'ad'
-var defaultAlphabet = 'abcefghijklmnopqrstuvwxyz0123456789_-';
+const defaultAlphabet = 'abcefghijklmnopqrstuvwxyz0123456789_-';
 
-var IdGenerator = function IdGenerator(alphabet) {
+export function createIdGenerator(alphabet?: string) {
   var options = {
     alphabet: alphabet || defaultAlphabet,
     length: 1,
-    index: 0
+    index: 0,
   };
-  return function () {
+
+  return function() {
     var res = generateId(options);
-
-    while (/^[0-9-].*$/.test(res)) {
-      res = generateId(options);
-    }
-
+    // class names should not start with a number or a dash
+    while (/^[0-9-].*$/.test(res)) res = generateId(options);
     return res;
   };
-};
+}
 
-var generateId = function generateId(options) {
+var generateId = function(options: {
+  length: number;
+  alphabet: string;
+  index: number;
+}) {
   var res = '';
 
   for (var i = options.length - 1; i >= 0; i--) {
@@ -30,7 +30,6 @@ var generateId = function generateId(options) {
   }
 
   options.index++;
-
   if (options.index > Math.pow(options.alphabet.length, options.length) - 1) {
     options.length++;
     options.index = 0;
@@ -38,5 +37,3 @@ var generateId = function generateId(options) {
 
   return res;
 };
-
-module.exports = IdGenerator;
