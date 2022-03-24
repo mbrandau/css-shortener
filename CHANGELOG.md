@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0-alpha.0 - 24/03/2022
+
+  - **BREAKING:** rewrite library
+
 ## 2.1.0 - 10/09/2018
 
   - Move generation of new class names to a public function (`getNewClassName(className)`)
