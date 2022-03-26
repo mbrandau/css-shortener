@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0.0-alpha.0 - 24/03/2022
+## 3.0.0-next - 26/03/2022
 
   - **BREAKING:** rewrite library
 
