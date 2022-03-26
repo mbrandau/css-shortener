@@ -21,7 +21,7 @@
     "size": "size-limit",
     "analyze": "size-limit --why",
     "semantic-release": "semantic-release",
-    "typedoc": "typedoc --out docs src/index.ts"
+    "typedoc": "typedoc --out docs src/index.ts --excludePrivate"
   },
   "peerDependencies": {},
   "husky": {

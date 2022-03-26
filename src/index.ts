@@ -1,6 +1,9 @@
 import { createIdGenerator } from './idGenerator';
 
-interface Options {
+export interface Options {
+  /**
+   * Alphabet to use for generating ids.
+   */
   alphabet?: string;
 }
 
