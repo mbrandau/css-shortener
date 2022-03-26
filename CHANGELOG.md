@@ -1,3 +1,14 @@
+## [3.0.0](https://github.com/mbrandau/css-shortener/compare/v2.2.0...v3.0.0) (2022-03-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* trigger breaking change
+
+### Bug Fixes
+
+* update semantic release config ([8d04b25](https://github.com/mbrandau/css-shortener/commit/8d04b25ed86f3b531bf8359e387e2de8d3b8de7b))
+
 # Changelog
 
 ## 3.0.0 - 26/03/2022

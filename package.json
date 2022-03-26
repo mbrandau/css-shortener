@@ -1,7 +1,7 @@
 {
   "name": "css-shortener",
   "description": "Utility to shorten css class names",
-  "version": "3.0.0-development",
+  "version": "3.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
