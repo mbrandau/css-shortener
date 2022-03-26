@@ -48,6 +48,17 @@ describe('CssShortener', function() {
       c.importMap(importMap, true);
       expect(c.map).toStrictEqual(importMap);
     });
+    it('throws when a short name to import is already in the map', () => {
+      const c = new CssShortener(),
+        prevMap = {
+          'test-class': 'a',
+        },
+        importMap = {
+          'test-class2': 'a',
+        };
+      c.importMap(prevMap);
+      expect(() => c.importMap(importMap)).toThrowErrorMatchingSnapshot();
+    });
   });
   describe('#map', function() {
     it('should return a map with original class names and shortened versions', function() {
@@ -57,6 +68,18 @@ describe('CssShortener', function() {
         };
       c.importMap(map);
       expect(c.map).toStrictEqual(map);
+    });
+  });
+  describe('#shortenClassName', function() {
+    it('should not reuse already existing short class names', function() {
+      const c = new CssShortener(),
+        map = {
+          'test-class': 'b',
+        };
+      c.importMap(map);
+      expect(c.shortenClassName('test1')).toBe('a');
+      expect(c.shortenClassName('test2')).toBe('c');
+      expect(c.shortenClassName('test-class')).toBe('b');
     });
   });
 });
