@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - next
 jobs:
   release:
     name: Release
@@ -15,9 +16,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 'lts/*'
+          node-version: '16'
       - name: Install dependencies
         run: npm ci
+      - name: Build
+        run: npm run build
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
