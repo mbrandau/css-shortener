@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CssShortener #importMap() throws when a short name to import is already in the map 1`] = `"Cannot import class 'test-class2'. Short class name 'a' is already being used."`;

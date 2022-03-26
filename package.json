@@ -1,7 +1,7 @@
 {
   "name": "css-shortener",
   "description": "Utility to shorten css class names",
-  "version": "3.0.0-alpha.0",
+  "version": "3.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -10,7 +10,7 @@
     "src"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   },
   "scripts": {
     "start": "tsdx watch",
@@ -19,7 +19,9 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
-    "analyze": "size-limit --why"
+    "analyze": "size-limit --why",
+    "semantic-release": "semantic-release",
+    "typedoc": "typedoc --out docs src/index.ts --excludePrivate"
   },
   "peerDependencies": {},
   "husky": {
@@ -35,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mbrandau/css-shortener.git"
+    "url": "https://github.com/mbrandau/css-shortener.git"
   },
   "keywords": [
     "css",
@@ -61,11 +63,16 @@
     }
   ],
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
     "@size-limit/preset-small-lib": "^7.0.8",
+    "conventional-changelog-conventionalcommits": "^4.6.3",
     "husky": "^7.0.4",
+    "semantic-release": "^19.0.2",
     "size-limit": "^7.0.8",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
+    "typedoc": "0.22.13",
     "typescript": "^4.6.2"
   }
 }

@@ -1,0 +1,101 @@
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>css-shortener</title><meta name="description" content="Documentation for css-shortener"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">css-shortener</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>css-shortener</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#css-shortener" id="css-shortener" style="color: inherit; text-decoration: none;">
+  <h1>css-shortener</h1>
+</a>
+<p><a href="https://github.com/mbrandau/css-shortener/actions/workflows/main.yml"><img src="https://github.com/mbrandau/css-shortener/actions/workflows/main.yml/badge.svg" alt="CI"></a> <a href="https://www.npmjs.com/package/css-shortener"><img src="https://img.shields.io/npm/v/css-shortener.svg" alt="npm"></a> <a href="https://www.npmjs.com/package/css-shortener"><img src="https://img.shields.io/npm/dt/css-shortener.svg" alt="npm"></a> <a href="https://github.com/mbrandau/css-shortener/issues"><img src="https://img.shields.io/github/issues/mbrandau/css-shortener.svg" alt="GitHub issues"></a></p>
+
+<a href="#preview" id="preview" style="color: inherit; text-decoration: none;">
+  <h3>Preview</h3>
+</a>
+<pre><code class="language-css"><span class="hl-0">/* BEFORE */</span><br/><span class="hl-1">p.this-class-is-extremely-long-and-definitely-needs-to-be-shortened</span><span class="hl-2">,</span><br/><span class="hl-1">p.why-is-this-so-long-if-it-just-makes-white-text</span><span class="hl-2"> {</span><br/><span class="hl-2">  </span><span class="hl-3">color</span><span class="hl-2">: </span><span class="hl-4">white</span><span class="hl-2">;</span><br/><span class="hl-2">}</span><br/><br/><span class="hl-0">/* AFTER */</span><br/><span class="hl-1">p.a</span><span class="hl-2">,</span><br/><span class="hl-1">p.b</span><span class="hl-2"> {</span><br/><span class="hl-2">  </span><span class="hl-3">color</span><span class="hl-2">: </span><span class="hl-4">white</span><span class="hl-2">;</span><br/><span class="hl-2">}</span>
+</code></pre>
+
+<a href="#table-of-contents" id="table-of-contents" style="color: inherit; text-decoration: none;">
+  <h2>Table of contents</h2>
+</a>
+<ol>
+<li><a href="#quick-start">Quick Start</a></li>
+<li><a href="#api-documentation">API Documentation</a><ol>
+<li><a href="#constructor">Constructor</a><ul>
+<li><a href="#options">Options</a></li>
+</ul>
+</li>
+<li><a href="#importmapmap-override"><code>#importMap(map, override)</code></a></li>
+<li><a href="#map"><code>#map</code></a></li>
+</ol>
+</li>
+<li><a href="#examples">Examples</a><ol>
+<li><a href="#css-filter-for-nunjucks-and-express">CSS filter for nunjucks and express</a></li>
+</ol>
+</li>
+</ol>
+
+<a href="#quick-start" id="quick-start" style="color: inherit; text-decoration: none;">
+  <h2>Quick Start</h2>
+</a>
+<pre><code class="language-js"><span class="hl-5">import</span><span class="hl-2"> { </span><span class="hl-6">CssShortener</span><span class="hl-2"> } </span><span class="hl-5">from</span><span class="hl-2"> </span><span class="hl-7">&#39;css-shortener&#39;</span><span class="hl-2">;</span><br/><br/><span class="hl-8">const</span><span class="hl-2"> </span><span class="hl-9">shortener</span><span class="hl-2"> = </span><span class="hl-8">new</span><span class="hl-2"> </span><span class="hl-10">CssShortener</span><span class="hl-2">();</span><br/><br/><span class="hl-6">console</span><span class="hl-2">.</span><span class="hl-10">log</span><span class="hl-2">(</span><span class="hl-6">shortener</span><span class="hl-2">.</span><span class="hl-10">shortenClassName</span><span class="hl-2">(</span><span class="hl-7">&#39;long-class&#39;</span><span class="hl-2">));</span><br/><span class="hl-0">// Output: a</span><br/><br/><span class="hl-6">console</span><span class="hl-2">.</span><span class="hl-10">log</span><span class="hl-2">(</span><span class="hl-6">shortener</span><span class="hl-2">.</span><span class="hl-6">map</span><span class="hl-2">);</span><br/><span class="hl-0">// Output: {</span><br/><span class="hl-0">//   &quot;long-class&quot;: &quot;a&quot;</span><br/><span class="hl-0">// }</span>
+</code></pre>
+
+<a href="#api-documentation" id="api-documentation" style="color: inherit; text-decoration: none;">
+  <h2>API Documentation</h2>
+</a>
+
+<a href="#constructor" id="constructor" style="color: inherit; text-decoration: none;">
+  <h3>Constructor</h3>
+</a>
+<pre><code class="language-js"><span class="hl-8">const</span><span class="hl-2"> </span><span class="hl-9">options</span><span class="hl-2"> = {</span><br/><span class="hl-2">  </span><span class="hl-6">alphabet:</span><span class="hl-2"> </span><span class="hl-7">&#39;abcdef&#39;</span><span class="hl-2">,</span><br/><span class="hl-2">};</span><br/><span class="hl-8">const</span><span class="hl-2"> </span><span class="hl-9">shortener</span><span class="hl-2"> = </span><span class="hl-8">new</span><span class="hl-2"> </span><span class="hl-10">CssShortener</span><span class="hl-2">(</span><span class="hl-6">options</span><span class="hl-2">);</span>
+</code></pre>
+<p>The <code>options</code> parameter can be omitted.</p>
+
+<a href="#options" id="options" style="color: inherit; text-decoration: none;">
+  <h4>Options</h4>
+</a>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Optionality</th>
+<th>Description</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>alphabet</td>
+<td><em>string</em></td>
+<td>optional</td>
+<td>The alphabet is used to generate the new class names.</td>
+<td><code>&#39;abcefghijklmnopqrstuvwxyz0123456789_-&#39;</code></td>
+</tr>
+</tbody></table>
+<p>Note that there is no <code>d</code> in the default alphabet to avoid generation of the combination <code>ad</code>.</p>
+
+<a href="#importmapmap-override" id="importmapmap-override" style="color: inherit; text-decoration: none;">
+  <h3><code>#importMap(map, override)</code></h3>
+</a>
+<p>Imports mappings into the shortener</p>
+<pre><code class="language-js"><span class="hl-6">cssShortener</span><span class="hl-2">.</span><span class="hl-10">importMap</span><span class="hl-2">(</span><br/><span class="hl-2">  {</span><br/><span class="hl-2">    </span><span class="hl-7">&#39;my-extremely-long-class-name&#39;</span><span class="hl-6">:</span><span class="hl-2"> </span><span class="hl-7">&#39;a&#39;</span><span class="hl-2">,</span><br/><span class="hl-2">  },</span><br/><span class="hl-2">  </span><span class="hl-8">false</span><br/><span class="hl-2">);</span>
+</code></pre>
+<p>If <code>override</code> is true, class names that are already mapped will be overridden.<br>The <code>override</code> parameter can be omitted.</p>
+
+<a href="#map" id="map" style="color: inherit; text-decoration: none;">
+  <h3><code>#map</code></h3>
+</a>
+<p>Returns the mapped class names</p>
+<pre><code class="language-js"><span class="hl-8">var</span><span class="hl-2"> </span><span class="hl-6">map</span><span class="hl-2"> = </span><span class="hl-6">cssShortener</span><span class="hl-2">.</span><span class="hl-10">getMap</span><span class="hl-2">();</span>
+</code></pre>
+<pre><code class="language-json"><span class="hl-2">{</span><br/><span class="hl-2">  </span><span class="hl-11">&quot;my-extremely-long-class-name&quot;</span><span class="hl-2">: </span><span class="hl-7">&quot;a&quot;</span><br/><span class="hl-2">}</span>
+</code></pre>
+
+<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
+  <h2>Examples</h2>
+</a>
+
+<a href="#css-filter-for-nunjucks-and-express" id="css-filter-for-nunjucks-and-express" style="color: inherit; text-decoration: none;">
+  <h3>CSS filter for nunjucks and express</h3>
+</a>
+<pre><code class="language-js"><span class="hl-8">const</span><span class="hl-2"> </span><span class="hl-9">express</span><span class="hl-2"> = </span><span class="hl-10">require</span><span class="hl-2">(</span><span class="hl-7">&#39;express&#39;</span><span class="hl-2">);</span><br/><span class="hl-8">const</span><span class="hl-2"> </span><span class="hl-9">nunjucks</span><span class="hl-2"> = </span><span class="hl-10">require</span><span class="hl-2">(</span><span class="hl-7">&#39;nunjucks&#39;</span><span class="hl-2">);</span><br/><br/><span class="hl-8">const</span><span class="hl-2"> </span><span class="hl-9">cssMap</span><span class="hl-2"> = </span><span class="hl-12">JSON</span><span class="hl-2">.</span><span class="hl-10">parse</span><span class="hl-2">(</span><span class="hl-6">fs</span><span class="hl-2">.</span><span class="hl-10">readFileSync</span><span class="hl-2">(</span><span class="hl-7">&#39;./cssMap.json&#39;</span><span class="hl-2">));</span><br/><br/><span class="hl-8">const</span><span class="hl-2"> </span><span class="hl-9">app</span><span class="hl-2"> = </span><span class="hl-10">express</span><span class="hl-2">();</span><br/><span class="hl-8">const</span><span class="hl-2"> </span><span class="hl-9">env</span><span class="hl-2"> = </span><span class="hl-6">nunjucks</span><span class="hl-2">.</span><span class="hl-10">configure</span><span class="hl-2">(</span><span class="hl-7">&#39;your-views-folder&#39;</span><span class="hl-2">, { </span><span class="hl-6">express:</span><span class="hl-2"> </span><span class="hl-6">app</span><span class="hl-2"> });</span><br/><br/><span class="hl-6">env</span><span class="hl-2">.</span><span class="hl-10">addFilter</span><span class="hl-2">(</span><span class="hl-7">&#39;css&#39;</span><span class="hl-2">, </span><span class="hl-8">function</span><span class="hl-2">(</span><span class="hl-6">str</span><span class="hl-2">) {</span><br/><span class="hl-2">  </span><span class="hl-5">return</span><span class="hl-2"> </span><span class="hl-6">str</span><br/><span class="hl-2">    .</span><span class="hl-10">split</span><span class="hl-2">(</span><span class="hl-7">&#39; &#39;</span><span class="hl-2">)</span><br/><span class="hl-2">    .</span><span class="hl-10">map</span><span class="hl-2">(</span><span class="hl-6">c</span><span class="hl-2"> </span><span class="hl-8">=&gt;</span><span class="hl-2"> (</span><span class="hl-6">cssMap</span><span class="hl-2">[</span><span class="hl-6">c</span><span class="hl-2">] != </span><span class="hl-8">null</span><span class="hl-2"> ? </span><span class="hl-6">cssMap</span><span class="hl-2">[</span><span class="hl-6">c</span><span class="hl-2">] : </span><span class="hl-6">c</span><span class="hl-2">))</span><br/><span class="hl-2">    .</span><span class="hl-10">join</span><span class="hl-2">(</span><span class="hl-7">&#39; &#39;</span><span class="hl-2">);</span><br/><span class="hl-2">});</span>
+</code></pre>
+<pre><code class="language-html"><span class="hl-0">&lt;!-- BEFORE --&gt;</span><br/><span class="hl-13">&lt;</span><span class="hl-14">div</span><span class="hl-2"> </span><span class="hl-3">class</span><span class="hl-2">=</span><span class="hl-15">&quot;{{&#39;my-extremely-long-class-name&#39;|css}}&quot;</span><span class="hl-13">&gt;&lt;/</span><span class="hl-14">div</span><span class="hl-13">&gt;</span><br/><span class="hl-0">&lt;!-- RENDERED --&gt;</span><br/><span class="hl-13">&lt;</span><span class="hl-14">div</span><span class="hl-2"> </span><span class="hl-3">class</span><span class="hl-2">=</span><span class="hl-15">&quot;a&quot;</span><span class="hl-13">&gt;&lt;/</span><span class="hl-14">div</span><span class="hl-13">&gt;</span>
+</code></pre>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-class"><a href="classes/CssShortener.html" class="tsd-kind-icon">Css<wbr/>Shortener</a></li><li class="tsd-kind-interface"><a href="interfaces/Options.html" class="tsd-kind-icon">Options</a></li><li class="tsd-kind-type-alias"><a href="modules.html#ClassNameMap" class="tsd-kind-icon">Class<wbr/>Name<wbr/>Map</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li><li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
