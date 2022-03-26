@@ -1,8 +1,8 @@
 import { createIdGenerator } from './idGenerator';
 
-type Options = {
+interface Options {
   alphabet?: string;
-};
+}
 
 export type ClassNameMap = { [longName: string]: string };
 
